@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HCC Experiment</title>
+</head>
+<body>
+
+    <div class="container">
+        <div id="main" class="row">
+            <div id="first" class="col-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Main menu</h4>
+                        <p>
+                            <button class="btn" onclick="wrong()">[1] Option1</button>
+                        </p>
+                        <p>
+                            <button class="btn" onclick="right('#second')">[2] Option2</button>
+                        </p>
+                        <p>
+                            <button class="btn" onclick="wrong()">[3] Option3</button>
+                        </p>
+                        <p>
+                            <button class="btn" onclick="wrong()">[4] Option4</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="second" class="col-3" style="display: none">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Second menu</h4>
+                        <p>
+                            <button class="btn" onclick="wrong()">[1] Option1</button>
+                        </p>
+                        <p>
+                            <button class="btn" onclick="wrong()">[2] Option2</button>
+                        </p>
+                        <p>
+                            <button class="btn" onclick="right('#third')">[3] Option3</button>
+                        </p>
+                        <p>
+                            <button class="btn" onclick="wrong()">[4] Option4</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="third" class="col-3" style="display: none">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Main menu</h4>
+                        <p>
+                            <button class="btn" onclick="wrong()">[1] Option1</button>
+                        </p>
+                        <p>
+                            <button class="btn" onclick="wrong()">[2] Option2</button>
+                        </p>
+                        <p>
+                            <button class="btn" onclick="wrong()">[3] Option3</button>
+                        </p>
+                        <p>
+                            <button class="btn" onclick="right('#fourth')">[4] Option4</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="fourth" class="col-3" style="display: none">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Main menu</h4>
+                        <p>
+                            <button class="btn" onclick="right('last')">[1] Option1</button>
+                        </p>
+                        <p>
+                            <button class="btn" onclick="wrong()">[2] Option2</button>
+                        </p>
+                        <p>
+                            <button class="btn" onclick="wrong()">[3] Option3</button>
+                        </p>
+                        <p>
+                            <button class="btn" onclick="wrong()">[4] Option4</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="wrongModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Wrong path</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Wrong path. Please choose another option.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="lastModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Finished</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Thank you for participation in experiment :)</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <script>
+        function wrong() {
+            $("#wrongModal").modal();
+        }
+
+        function right(nextId) {
+            if (nextId == 'last') {
+                $("#lastModal").modal();
+            } else {
+                $(nextId).show();
+            }
+        }
+    </script>
+</body>
+</html>
