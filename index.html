@@ -7,22 +7,42 @@
 <body>
 
     <div class="container">
-        <div id="main" class="row">
+        <div id="firstScreen" class="row">
+            <div class="col-12">
+
+                <div class="jumbotron">
+                    DESCRIPTION
+                </div>
+
+                <form id="startForm">
+                    <div class="form-group">
+
+                        <input id="name" name="name" class="form-control" placeholder="Name and Surname">
+                    </div>
+                    <div class="form-group">
+                        <input id="age" name="age" class="form-control" placeholder="Age">
+                    </div>
+                    <button id="startExperiment" class="btn btn-primary">Start experiment</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="firstExperiment" class="row" style="display: none">
             <div id="first" class="col-3">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Main menu</h4>
                         <p>
-                            <button class="btn" onclick="wrong()">[1] Option1</button>
+                            <button class="btn first_option" onclick="wrong()">[1] Option1</button>
                         </p>
                         <p>
-                            <button class="btn" onclick="right('#second')">[2] Option2</button>
+                            <button class="btn second_option" onclick="right('#second')">[2] Option2</button>
                         </p>
                         <p>
-                            <button class="btn" onclick="wrong()">[3] Option3</button>
+                            <button class="btn third_option" onclick="wrong()">[3] Option3</button>
                         </p>
                         <p>
-                            <button class="btn" onclick="wrong()">[4] Option4</button>
+                            <button class="btn fourth_option" onclick="wrong()">[4] Option4</button>
                         </p>
                     </div>
                 </div>
@@ -32,16 +52,16 @@
                     <div class="card-body">
                         <h4 class="card-title">Second menu</h4>
                         <p>
-                            <button class="btn" onclick="wrong()">[1] Option1</button>
+                            <button class="btn first_option" onclick="wrong()">[1] Option1</button>
                         </p>
                         <p>
-                            <button class="btn" onclick="wrong()">[2] Option2</button>
+                            <button class="btn second_option" onclick="wrong()">[2] Option2</button>
                         </p>
                         <p>
-                            <button class="btn" onclick="right('#third')">[3] Option3</button>
+                            <button class="btn third_option" onclick="right('#third')">[3] Option3</button>
                         </p>
                         <p>
-                            <button class="btn" onclick="wrong()">[4] Option4</button>
+                            <button class="btn fourth_option" onclick="wrong()">[4] Option4</button>
                         </p>
                     </div>
                 </div>
@@ -51,16 +71,16 @@
                     <div class="card-body">
                         <h4 class="card-title">Main menu</h4>
                         <p>
-                            <button class="btn" onclick="wrong()">[1] Option1</button>
+                            <button class="btn first_option" onclick="wrong()">[1] Option1</button>
                         </p>
                         <p>
-                            <button class="btn" onclick="wrong()">[2] Option2</button>
+                            <button class="btn second_option" onclick="wrong()">[2] Option2</button>
                         </p>
                         <p>
-                            <button class="btn" onclick="wrong()">[3] Option3</button>
+                            <button class="btn third_option" onclick="wrong()">[3] Option3</button>
                         </p>
                         <p>
-                            <button class="btn" onclick="right('#fourth')">[4] Option4</button>
+                            <button class="btn fourth_option" onclick="right('#fourth')">[4] Option4</button>
                         </p>
                     </div>
                 </div>
@@ -70,16 +90,16 @@
                     <div class="card-body">
                         <h4 class="card-title">Main menu</h4>
                         <p>
-                            <button class="btn" onclick="right('last')">[1] Option1</button>
+                            <button class="btn first_option" onclick="right('last')">[1] Option1</button>
                         </p>
                         <p>
-                            <button class="btn" onclick="wrong()">[2] Option2</button>
+                            <button class="btn second_option" onclick="wrong()">[2] Option2</button>
                         </p>
                         <p>
-                            <button class="btn" onclick="wrong()">[3] Option3</button>
+                            <button class="btn third_option" onclick="wrong()">[3] Option3</button>
                         </p>
                         <p>
-                            <button class="btn" onclick="wrong()">[4] Option4</button>
+                            <button class="btn fourth_option" onclick="wrong()">[4] Option4</button>
                         </p>
                     </div>
                 </div>
@@ -140,17 +160,85 @@
             crossorigin="anonymous"></script>
 
     <script>
+        var resultObj = {};
+
+        $(document).ready(function () {
+            $("#startExperiment").click(function () {
+                startExperiment();
+
+                return false;
+            })
+
+            $(document).keydown(function (key) {
+
+                console.log(key.which);
+
+                if (key.which == 49) {
+
+                    getAndPressProperKey(".first_option")
+                } else if (key.which == 50) {
+
+                    getAndPressProperKey(".second_option");
+                } else if (key.which == 51) {
+
+                    getAndPressProperKey(".third_option");
+                } else if (key.which == 52) {
+
+                    getAndPressProperKey(".fourth_option");
+                }
+            });
+
+        })
+
+        function getAndPressProperKey(keyClass) {
+            var btnArr = $(keyClass + ":visible");
+            var btnToClick = $(btnArr).last();
+            console.log(btnToClick);
+
+            $(btnToClick).click();
+        }
+
+        function startExperiment() {
+            resultObj.name = $("#name").val();
+            resultObj.age = $("#age").val();
+
+            $("#firstScreen").hide();
+            $("#firstExperiment").show();
+
+            startTime = performance.now();
+        }
+
         function wrong() {
             $("#wrongModal").modal();
+
+            return false;
         }
 
         function right(nextId) {
             if (nextId == 'last') {
+                saveResult();
+
                 $("#lastModal").modal();
             } else {
                 $(nextId).show();
             }
+
+            return false;
+        }
+
+        function saveResult() {
+            var endTime = performance.now();
+
+            resultObj.time = endTime - startTime;
+
+            console.log(resultObj);
         }
     </script>
+
+    <style>
+        #firstExperiment button {
+            pointer-events: none;
+        }
+    </style>
 </body>
 </html>
