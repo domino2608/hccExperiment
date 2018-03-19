@@ -106,6 +106,10 @@
             </div>
         </div>
 
+        <div id="lastScreen" class="row" style="display: none">
+            <a id="downloadBtn" class="btn btn-primary col-12">Download result</a>
+        </div>
+
         <div id="wrongModal" class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -138,7 +142,7 @@
                         <p>Thank you for participation in experiment :)</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                        <button id="lastModalBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
                     </div>
                 </div>
             </div>
@@ -168,6 +172,15 @@
 
                 return false;
             })
+
+            $("#downloadBtn").click(function () {
+                download();
+            });
+
+            $("#lastModalBtn").click(function () {
+                $("#firstExperiment").hide();
+                $("#lastScreen").show();
+            });
 
             $(document).keydown(function (key) {
 
@@ -233,6 +246,18 @@
 
             console.log(resultObj);
         }
+
+        function download() {
+            var name = resultObj.name + '_' + resultObj.age + '.txt';
+            var text = "Name and surname\tAge\tTime of experiment\n" +
+                resultObj.name + "\t" + resultObj.age + "\t" + resultObj.time;
+
+            var a = $("#downloadBtn");
+            var file = new Blob([text], {type: 'text/plain'});
+            $(a).attr("href", URL.createObjectURL(file));
+            $(a).attr("download", name);
+        }
+
     </script>
 
     <style>
