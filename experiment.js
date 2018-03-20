@@ -14,13 +14,10 @@ $(document).ready(function () {
     });
 
 
-    // $("#downloadBtn").click(function () {
-    //     download();
-    // });
 
     $(document).keydown(function (key) {
 
-        console.log(key.which);
+        //console.log(key.which);
         if (state === 'pretrial') {
             if (key.which === 32) {
                 $("#startTrial").click();
@@ -172,18 +169,15 @@ function saveResult() {
     state = 'pretrial';
     $("#middleScreen").show();
     nextTrial();
-    console.log(resultObj);
 }
 
 function download() {
     var name = 'ex_' + moment().format("D-MM-YYYY_HH:mm:ss") + '.csv';
-    console.log(name);
-    var text = "Age;Gender;TrialNumber;TrialType;Time,Errors\n";
+    var text = "Age;Gender;TrialNumber;TrialType;Time;Errors\n";
     resultObj.results.forEach(res =>
         (text = text +
             resultObj.age + ";" + resultObj.gender + ";" + res[0] + ";" + res[1] + ";" + res[2] + ";" + res[3] + "\n")
     );
-    console.log(text);
     var a = $("#downloadBtn");
     var file = new Blob([text], {type: 'text/plain'});
     $(a).attr("href", URL.createObjectURL(file));
@@ -198,7 +192,6 @@ function wrong() {
 }
 
 function right(nextId) {
-    console.log('happened! ' + state + " " + nextId);
     if (nextId === 'last') {
         saveResult();
     } else {
@@ -222,7 +215,6 @@ function right(nextId) {
 function getAndPressProperKey(keyClass) {
     var btnArr = $(keyClass + ":visible");
     var btnToClick = $(btnArr).last();
-    console.log(btnToClick);
 
     $(btnToClick).click();
 }
