@@ -3,267 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <title>HCC Experiment</title>
+    <style>
+        .container {
+            padding-top: 75px;
+        }
+
+        .experiment, #middleScreen button {
+            pointer-events: none;
+        }
+
+        u {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="container">
-        <div id="firstScreen" class="row">
-            <div class="col-12">
+<div class="container">
 
-                <div class="jumbotron">
-                    DESCRIPTION
+    <!--INTRO SCREEN -->
+    <div id="firstScreen" class="row">
+        <div class="col-12">
+            <div class="jumbotron">
+                DESCRIPTION
+            </div>
+            <form id="startForm">
+                <div class="form-group">
+                    <input id="age" name="age" class="form-control" placeholder="Age" type="number">
+                </div>
+                <div class="form-group" id="gender">
+                    <label class="radio-inline"><input type="radio" name="optradio" value="M">Male</label>
+                    <label class="radio-inline"><input type="radio" name="optradio" value="F">Female</label>
                 </div>
 
-                <form id="startForm">
-                    <div class="form-group">
-
-                        <input id="name" name="name" class="form-control" placeholder="Name and Surname">
-                    </div>
-                    <div class="form-group">
-                        <input id="age" name="age" class="form-control" placeholder="Age">
-                    </div>
-                    <button id="startExperiment" class="btn btn-primary">Start experiment</button>
-                </form>
-            </div>
+                <button id="startExperiment" class="btn btn-primary">Start experiment</button>
+            </form>
         </div>
+    </div>
 
-        <div id="firstExperiment" class="row" style="display: none">
-            <div id="first" class="col-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Main menu</h4>
-                        <p>
-                            <button class="btn first_option" onclick="wrong()">[1] Option1</button>
-                        </p>
-                        <p>
-                            <button class="btn second_option" onclick="right('#second')">[2] Option2</button>
-                        </p>
-                        <p>
-                            <button class="btn third_option" onclick="wrong()">[3] Option3</button>
-                        </p>
-                        <p>
-                            <button class="btn fourth_option" onclick="wrong()">[4] Option4</button>
-                        </p>
-                    </div>
-                </div>
+    <!--MIDDLE SCREEN-->
+    <div id="middleScreen" class="row" style="display: none">
+        <div class="col-12">
+            <div id="numDesc" class="jumbotron">
+                Your next task will be using the NUM method. Please press numbers associated with menu element order.
             </div>
-            <div id="second" class="col-3" style="display: none">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Second menu</h4>
-                        <p>
-                            <button class="btn first_option" onclick="wrong()">[1] Option1</button>
-                        </p>
-                        <p>
-                            <button class="btn second_option" onclick="wrong()">[2] Option2</button>
-                        </p>
-                        <p>
-                            <button class="btn third_option" onclick="right('#third')">[3] Option3</button>
-                        </p>
-                        <p>
-                            <button class="btn fourth_option" onclick="wrong()">[4] Option4</button>
-                        </p>
-                    </div>
-                </div>
+            <div id="alphaDesc" class="jumbotron">
+                Your next task will be using the ALPHA method. Please press first available letter as indicated.
             </div>
-            <div id="third" class="col-3" style="display: none">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Main menu</h4>
-                        <p>
-                            <button class="btn first_option" onclick="wrong()">[1] Option1</button>
-                        </p>
-                        <p>
-                            <button class="btn second_option" onclick="wrong()">[2] Option2</button>
-                        </p>
-                        <p>
-                            <button class="btn third_option" onclick="wrong()">[3] Option3</button>
-                        </p>
-                        <p>
-                            <button class="btn fourth_option" onclick="right('#fourth')">[4] Option4</button>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div id="fourth" class="col-3" style="display: none">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Main menu</h4>
-                        <p>
-                            <button class="btn first_option" onclick="right('last')">[1] Option1</button>
-                        </p>
-                        <p>
-                            <button class="btn second_option" onclick="wrong()">[2] Option2</button>
-                        </p>
-                        <p>
-                            <button class="btn third_option" onclick="wrong()">[3] Option3</button>
-                        </p>
-                        <p>
-                            <button class="btn fourth_option" onclick="wrong()">[4] Option4</button>
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <button id="startTrial" class="btn btn-primary btn-block" onclick="startTrial()">
+                Press 'SPACEBAR' to start
+            </button>
         </div>
-
-        <div id="lastScreen" class="row" style="display: none">
-            <a id="downloadBtn" class="btn btn-primary col-12">Download result</a>
-        </div>
-
-        <div id="wrongModal" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Wrong path</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Wrong path. Please choose another option.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="lastModal" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Finished</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Thank you for participation in experiment :)</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="lastModalBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
+    <!--NUMERICAL INPUT TRIAL-->
+    <div id="numTrial" class="row experiment" style="display: none">
+        <div id="numFirst" class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Main menu</h4>
+                    <p>
+                        <button class="btn first_option" onclick="right('#numSecond')">[1] Buy/Sell</button>
+                    </p>
+                    <p>
+                        <button class="btn second_option" onclick="wrong()">[2] Contact</button>
+                    </p>
+                    <p>
+                        <button class="btn third_option" onclick="wrong()">[3] Information</button>
+                    </p>
+                    <p>
+                        <button class="btn fourth_option" onclick="wrong()">[4] Support</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="numSecond" class="col-3" style="display: none">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Select Vehicle</h4>
+                    <p>
+                        <button class="btn first_option" onclick="wrong()">[1] Bicycles</button>
+                    </p>
+                    <p>
+                        <button class="btn second_option" onclick="wrong()">[2] Boats</button>
+                    </p>
+                    <p>
+                        <button class="btn third_option" onclick="right('#numThird')">[3] Cars</button>
+                    </p>
+                    <p>
+                        <button class="btn fourth_option" onclick="wrong()">[4] Motorbikes</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="numThird" class="col-3" style="display: none">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Select by..</h4>
+                    <p>
+                        <button class="btn first_option" onclick="right('#numFourth')">[1] Brand</button>
+                    </p>
+                    <p>
+                        <button class="btn second_option" onclick="wrong()">[2] Location</button>
+                    </p>
+                    <p>
+                        <button class="btn third_option" onclick="wrong()">[3] Price Range</button>
+                    </p>
+                    <p>
+                        <button class="btn fourth_option" onclick="wrong()">[4] Size</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="numFourth" class="col-3" style="display: none">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Select Brand</h4>
+                    <p>
+                        <button class="btn first_option" onclick="wrong()">[1] Chevrolet</button>
+                    </p>
+                    <p>
+                        <button class="btn second_option" onclick="wrong()">[2] Kia</button>
+                    </p>
+                    <p>
+                        <button class="btn third_option" onclick="wrong()">[3] Mazda</button>
+                    </p>
+                    <p>
+                        <button class="btn fourth_option" onclick="right('last')">[4] Mitsubishi</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <script>
-        var resultObj = {};
+    <!--ALPHABETICAL INPUT TRIAL-->
+    <div id="alphaTrial" class="row experiment" style="display: none">
+        <div id="alphaFirst" class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Main menu</h4>
+                    <p>
+                        <button class="btn first_option" onclick="right('#alphaSecond')">[B] <u>B</u>uy/Sell</button>
+                    </p>
+                    <p>
+                        <button class="btn second_option" onclick="wrong()">[C] <u>C</u>ontact</button>
+                    </p>
+                    <p>
+                        <button class="btn third_option" onclick="wrong()">[I] <u>I</u>nformation</button>
+                    </p>
+                    <p>
+                        <button class="btn fourth_option" onclick="wrong()">[S] <u>S</u>upport</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="alphaSecond" class="col-3" style="display: none">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Select Vehicle</h4>
+                    <p>
+                        <button class="btn first_option" onclick="wrong()">[B] <u>B</u>icycles</button>
+                    </p>
+                    <p>
+                        <button class="btn second_option" onclick="wrong()">[O] B<u>o</u>ats</button>
+                    </p>
+                    <p>
+                        <button class="btn third_option" onclick="right('#alphaThird')">[C] <u>C</u>ars</button>
+                    </p>
+                    <p>
+                        <button class="btn fourth_option" onclick="wrong()">[M] <u>M</u>otorbikes</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="alphaThird" class="col-3" style="display: none">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Select by..</h4>
+                    <p>
+                        <button class="btn first_option" onclick="right('#alphaFourth')">[B] <u>B</u>rand</button>
+                    </p>
+                    <p>
+                        <button class="btn second_option" onclick="wrong()">[L] <u>L</u>ocation</button>
+                    </p>
+                    <p>
+                        <button class="btn third_option" onclick="wrong()">[P] <u>P</u>rice Range</button>
+                    </p>
+                    <p>
+                        <button class="btn fourth_option" onclick="wrong()">[S] <u>S</u>ize</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="alphaFourth" class="col-3" style="display: none">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Select Brand</h4>
+                    <p>
+                        <button class="btn first_option" onclick="wrong()">[C] <u>C</u>hevrolet</button>
+                    </p>
+                    <p>
+                        <button class="btn second_option" onclick="wrong()">[K] <u>K</u>ia</button>
+                    </p>
+                    <p>
+                        <button class="btn third_option" onclick="wrong()">[M] <u>M</u>azda</button>
+                    </p>
+                    <p>
+                        <button class="btn fourth_option" onclick="right('last')">[I] M<u>i</u>tsubishi</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        $(document).ready(function () {
-            $("#startExperiment").click(function () {
-                startExperiment();
 
-                return false;
-            })
+    <div id="lastScreen" class="row" style="display: none">
+        <div class="jumbotron">
+            <p><b>Experiment finished! :)</b></p>
+            <p> Thank you for your participation!</p>
+        </div>
+        <a id="downloadBtn" class="btn btn-primary btn-block">Download result</a>
+    </div>
 
-            $("#downloadBtn").click(function () {
-                download();
-            });
+    <div id="wrongModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Wrong path</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Wrong path. Please choose another option.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            $("#lastModalBtn").click(function () {
-                $("#firstExperiment").hide();
-                $("#lastScreen").show();
-            });
+</div>
 
-            $(document).keydown(function (key) {
 
-                console.log(key.which);
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script>
 
-                if (key.which == 49) {
 
-                    getAndPressProperKey(".first_option")
-                } else if (key.which == 50) {
+<script src="experiment.js">
+</script>
 
-                    getAndPressProperKey(".second_option");
-                } else if (key.which == 51) {
-
-                    getAndPressProperKey(".third_option");
-                } else if (key.which == 52) {
-
-                    getAndPressProperKey(".fourth_option");
-                }
-            });
-
-        })
-
-        function getAndPressProperKey(keyClass) {
-            var btnArr = $(keyClass + ":visible");
-            var btnToClick = $(btnArr).last();
-            console.log(btnToClick);
-
-            $(btnToClick).click();
-        }
-
-        function startExperiment() {
-            resultObj.name = $("#name").val();
-            resultObj.age = $("#age").val();
-
-            $("#firstScreen").hide();
-            $("#firstExperiment").show();
-
-            startTime = performance.now();
-        }
-
-        function wrong() {
-            $("#wrongModal").modal();
-
-            return false;
-        }
-
-        function right(nextId) {
-            if (nextId == 'last') {
-                saveResult();
-
-                $("#lastModal").modal();
-            } else {
-                $(nextId).show();
-            }
-
-            return false;
-        }
-
-        function saveResult() {
-            var endTime = performance.now();
-
-            resultObj.time = endTime - startTime;
-
-            console.log(resultObj);
-        }
-
-        function download() {
-            var name = resultObj.name + '_' + resultObj.age + '.txt';
-            var text = "Name and surname\tAge\tTime of experiment\n" +
-                resultObj.name + "\t" + resultObj.age + "\t" + resultObj.time;
-
-            var a = $("#downloadBtn");
-            var file = new Blob([text], {type: 'text/plain'});
-            $(a).attr("href", URL.createObjectURL(file));
-            $(a).attr("download", name);
-        }
-
-    </script>
-
-    <style>
-        #firstExperiment button {
-            pointer-events: none;
-        }
-    </style>
 </body>
 </html>
