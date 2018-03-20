@@ -11,6 +11,9 @@
         .experiment, #middleScreen button {
             pointer-events: none;
         }
+        u {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -20,14 +23,11 @@
     <!--INTRO SCREEN -->
     <div id="firstScreen" class="row">
         <div class="col-12">
-
             <div class="jumbotron">
                 DESCRIPTION
             </div>
-
             <form id="startForm">
                 <div class="form-group">
-
                     <input id="name" name="name" class="form-control" placeholder="Name and Surname">
                 </div>
                 <div class="form-group">
@@ -40,100 +40,187 @@
 
     <!--MIDDLE SCREEN-->
     <div id="middleScreen" class="row" style="display: none">
-        <div id="numDesc" class="jumbotron">
-            Your next task will be using the NUM method. Please press numbers associated with menu element order.
+        <div class="col-12">
+            <div id="numDesc" class="jumbotron">
+                Your next task will be using the NUM method. Please press numbers associated with menu element order.
+            </div>
+            <div id="alphaDesc" class="jumbotron">
+                Your next task will be using the ALPHA method. Please press first available letter as indicated.
+            </div>
+            <button id="startTrial" class="btn btn-primary btn-block" onclick="startTrial()">
+                Press 'SPACEBAR' to start
+            </button>
         </div>
-        <div id="alphaDesc" class="jumbotron">
-            Your next task will be using the ALPHA method. Please press first available letter as indicated.
-        </div>
-        <button id="startTrial" class="btn btn-primary btn-block" onclick="startTrial()">
-            Press 'SPACEBAR' to start
-        </button>
     </div>
 
 
     <!--NUMERICAL INPUT TRIAL-->
-    <div id="firstExperiment" class="row experiment" style="display: none">
-        <div id="first" class="col-3">
+    <div id="numTrial" class="row experiment" style="display: none">
+        <div id="numFirst" class="col-3">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Main menu</h4>
                     <p>
-                        <button class="btn first_option" onclick="wrong()">[1] Option1</button>
+                        <button class="btn first_option" onclick="right('#numSecond')">[1] Buy/Sell</button>
                     </p>
                     <p>
-                        <button class="btn second_option" onclick="right('#second')">[2] Option2</button>
+                        <button class="btn second_option" onclick="wrong()">[2] Contact</button>
                     </p>
                     <p>
-                        <button class="btn third_option" onclick="wrong()">[3] Option3</button>
+                        <button class="btn third_option" onclick="wrong()">[3] Information</button>
                     </p>
                     <p>
-                        <button class="btn fourth_option" onclick="wrong()">[4] Option4</button>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div id="second" class="col-3" style="display: none">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Second menu</h4>
-                    <p>
-                        <button class="btn first_option" onclick="wrong()">[1] Option1</button>
-                    </p>
-                    <p>
-                        <button class="btn second_option" onclick="wrong()">[2] Option2</button>
-                    </p>
-                    <p>
-                        <button class="btn third_option" onclick="right('#third')">[3] Option3</button>
-                    </p>
-                    <p>
-                        <button class="btn fourth_option" onclick="wrong()">[4] Option4</button>
+                        <button class="btn fourth_option" onclick="wrong()">[4] Support</button>
                     </p>
                 </div>
             </div>
         </div>
-        <div id="third" class="col-3" style="display: none">
+        <div id="numSecond" class="col-3" style="display: none">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Main menu</h4>
+                    <h4 class="card-title">Select Vehicle</h4>
                     <p>
-                        <button class="btn first_option" onclick="wrong()">[1] Option1</button>
+                        <button class="btn first_option" onclick="wrong()">[1] Bicycles</button>
                     </p>
                     <p>
-                        <button class="btn second_option" onclick="wrong()">[2] Option2</button>
+                        <button class="btn second_option" onclick="wrong()">[2] Boats</button>
                     </p>
                     <p>
-                        <button class="btn third_option" onclick="wrong()">[3] Option3</button>
+                        <button class="btn third_option" onclick="right('#numThird')">[3] Cars</button>
                     </p>
                     <p>
-                        <button class="btn fourth_option" onclick="right('#fourth')">[4] Option4</button>
+                        <button class="btn fourth_option" onclick="wrong()">[4] Motorbikes</button>
                     </p>
                 </div>
             </div>
         </div>
-        <div id="fourth" class="col-3" style="display: none">
+        <div id="numThird" class="col-3" style="display: none">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Main menu</h4>
+                    <h4 class="card-title">Select by..</h4>
                     <p>
-                        <button class="btn first_option" onclick="right('last')">[1] Option1</button>
+                        <button class="btn first_option" onclick="right('#numFourth')">[1] Brand</button>
                     </p>
                     <p>
-                        <button class="btn second_option" onclick="wrong()">[2] Option2</button>
+                        <button class="btn second_option" onclick="wrong()">[2] Location</button>
                     </p>
                     <p>
-                        <button class="btn third_option" onclick="wrong()">[3] Option3</button>
+                        <button class="btn third_option" onclick="wrong()">[3] Price Range</button>
                     </p>
                     <p>
-                        <button class="btn fourth_option" onclick="wrong()">[4] Option4</button>
+                        <button class="btn fourth_option" onclick="wrong()">[4] Size</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="numFourth" class="col-3" style="display: none">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Select Brand</h4>
+                    <p>
+                        <button class="btn first_option" onclick="wrong()">[1] Chevrolet</button>
+                    </p>
+                    <p>
+                        <button class="btn second_option" onclick="wrong()">[2] Kia</button>
+                    </p>
+                    <p>
+                        <button class="btn third_option" onclick="wrong()">[3] Mazda</button>
+                    </p>
+                    <p>
+                        <button class="btn fourth_option" onclick="right('last')">[4] Mitsubishi</button>
                     </p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!--ALPHABETICAL INPUT TRIAL-->
+    <div id="alphaTrial" class="row experiment" style="display: none">
+        <div id="alphaFirst" class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Main menu</h4>
+                    <p>
+                        <button class="btn first_option" onclick="right('#alphaSecond')">[B] <u>B</u>uy/Sell</button>
+                    </p>
+                    <p>
+                        <button class="btn second_option" onclick="wrong()">[C] <u>C</u>ontact</button>
+                    </p>
+                    <p>
+                        <button class="btn third_option" onclick="wrong()">[I] <u>I</u>nformation</button>
+                    </p>
+                    <p>
+                        <button class="btn fourth_option" onclick="wrong()">[S] <u>S</u>upport</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="alphaSecond" class="col-3" style="display: none">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Select Vehicle</h4>
+                    <p>
+                        <button class="btn first_option" onclick="wrong()">[B] <u>B</u>icycles</button>
+                    </p>
+                    <p>
+                        <button class="btn second_option" onclick="wrong()">[O] B<u>o</u>ats</button>
+                    </p>
+                    <p>
+                        <button class="btn third_option" onclick="right('#alphaThird')">[C] <u>C</u>ars</button>
+                    </p>
+                    <p>
+                        <button class="btn fourth_option" onclick="wrong()">[M] <u>M</u>otorbikes</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="alphaThird" class="col-3" style="display: none">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Select by..</h4>
+                    <p>
+                        <button class="btn first_option" onclick="right('#alphaFourth')">[B] <u>B</u>rand</button>
+                    </p>
+                    <p>
+                        <button class="btn second_option" onclick="wrong()">[L] <u>L</u>ocation</button>
+                    </p>
+                    <p>
+                        <button class="btn third_option" onclick="wrong()">[P] <u>P</u>rice Range</button>
+                    </p>
+                    <p>
+                        <button class="btn fourth_option" onclick="wrong()">[S] <u>S</u>ize</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="alphaFourth" class="col-3" style="display: none">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Select Brand</h4>
+                    <p>
+                        <button class="btn first_option" onclick="wrong()">[C] <u>C</u>hevrolet</button>
+                    </p>
+                    <p>
+                        <button class="btn second_option" onclick="wrong()">[K] <u>K</u>ia</button>
+                    </p>
+                    <p>
+                        <button class="btn third_option" onclick="wrong()">[M] <u>M</u>azda</button>
+                    </p>
+                    <p>
+                        <button class="btn fourth_option" onclick="right('last')">[I] M<u>i</u>tsubishi</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div id="lastScreen" class="row" style="display: none">
-        <a id="downloadBtn" class="btn btn-primary col-12">Download result</a>
+        <div class="jumbotron">
+            <p> <b>Experiment finished! :)</b> </p>
+            <p> Thank you for your participation!</p>
+        </div>
+        <a id="downloadBtn" class="btn btn-primary btn-block">Download result</a>
     </div>
 
     <div id="wrongModal" class="modal" tabindex="-1" role="dialog">
