@@ -1,8 +1,11 @@
-var resultObj = {};
+var resultObj = {'results': []};
 var state = 'initial';
-var currentTrialType = -1;
 var trialQueue = [];
+/// Trial savables
 var startTime;
+var currentTrialType = -1;
+var trialnumber = 0;
+var errors = 0;
 
 $(document).ready(function () {
     $("#startExperiment").click(function () {
@@ -106,9 +109,8 @@ $(document).ready(function () {
 
 
 function startExperiment() {
-    resultObj.name = $("#name").val();
     resultObj.age = $("#age").val();
-
+    resultObj.gender = $('#gender input:radio:checked').val();
     $("#firstScreen").hide();
     $("#middleScreen").show();
     state = 'pretrial';
@@ -119,7 +121,7 @@ function startExperiment() {
 function nextTrial() {
     if (trialQueue.length === 0) {
         download();
-        state='final';
+        state = 'final';
         $("#middleScreen").hide();
         $("#lastScreen").show();
     } else {
@@ -145,6 +147,8 @@ function startTrial() {
         $("#alphaTrial").show();
     }
     startTime = performance.now();
+    errors = 0;
+    trialnumber = trialnumber + 1;
 
 }
 
@@ -157,12 +161,14 @@ function saveResult() {
         $("#numFourth").hide();
         $("#numTrial").hide();
     } else {
-        console.log("happened!");
         $("#alphaSecond").hide();
         $("#alphaThird").hide();
         $("#alphaFourth").hide();
         $("#alphaTrial").hide();
     }
+
+    resultObj['results'].push([trialnumber, currentTrialType, (endTime-startTime), errors]);
+    errors = 0;
     state = 'pretrial';
     $("#middleScreen").show();
     nextTrial();
@@ -170,10 +176,14 @@ function saveResult() {
 }
 
 function download() {
-    var name = resultObj.name + '_' + resultObj.age + '.txt';
-    var text = "Name and surname\tAge\tTime of experiment\n" +
-        resultObj.name + "\t" + resultObj.age + "\t" + resultObj.time;
-
+    var name = 'ex_' + moment().format("D-MM-YYYY_HH:mm:ss") + '.csv';
+    console.log(name);
+    var text = "Age;Gender;TrialNumber;TrialType;Time,Errors\n";
+    resultObj.results.forEach(res =>
+        (text = text +
+            resultObj.age + ";" + resultObj.gender + ";" + res[0] + ";" + res[1] + ";" + res[2] + ";" + res[3] + "\n")
+    );
+    console.log(text);
     var a = $("#downloadBtn");
     var file = new Blob([text], {type: 'text/plain'});
     $(a).attr("href", URL.createObjectURL(file));
@@ -181,6 +191,7 @@ function download() {
 }
 
 function wrong() {
+    errors = errors + 1;
     $("#wrongModal").modal();
 
     return false;
@@ -190,8 +201,6 @@ function right(nextId) {
     console.log('happened! ' + state + " " + nextId);
     if (nextId === 'last') {
         saveResult();
-
-        //$("#lastModal").modal();
     } else {
         switch (state) {
             case "alphatrial1":
